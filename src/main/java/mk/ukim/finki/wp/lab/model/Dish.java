@@ -6,12 +6,15 @@ import lombok.Data;
 @Data
 //@AllArgsConstructor
 public class Dish {
+    private Long id;
     private String dishId;
     private String name;
     private String cuisine;
     private int preparationTime;
+    private static Long counter = 0L;
 
     public Dish(String dishId, String name, String cuisine, int preparationTime) {
+        this.id = ++counter;
         this.dishId = dishId;
         this.name = name;
         this.cuisine = cuisine;
@@ -48,5 +51,13 @@ public class Dish {
 
     public void setPreparationTime(int preparationTime) {
         this.preparationTime = preparationTime;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

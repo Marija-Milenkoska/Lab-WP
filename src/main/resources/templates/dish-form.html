@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dish Form</title>
+
+    <style>
+        body { width: 800px; margin: auto; font-family: Arial, sans-serif; }
+        label { display: block; margin-top: 10px; }
+        input { width: 300px; padding: 5px; margin-top: 3px; }
+        button { margin-top: 20px; padding: 8px 20px; }
+        .container { margin-top: 20px; }
+    </style>
+</head>
+
+<body>
+
+<h1 th:text="${dish} != null ? 'Edit Dish' : 'Add New Dish'">Dish Form</h1>
+
+<div class="container">
+
+    <th:block th:if="${dish} != null">
+        <form th:action="@{'/dishes/edit/' + ${dish.id}}" method="post">
+
+            <label>Dish ID:</label>
+            <input type="text" name="dishId" th:value="${dish.dishId}" required/>
+
+            <label>Name:</label>
+            <input type="text" name="name" th:value="${dish.name}" required/>
+
+            <label>Cuisine:</label>
+            <input type="text" name="cuisine" th:value="${dish.cuisine}" required/>
+
+            <label>Preparation Time (min):</label>
+            <input type="number" name="preparationTime" th:value="${dish.preparationTime}" required/>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </th:block>
+
+    <th:block th:if="${dish} == null">
+        <form th:action="@{/dishes/add}" method="post">
+
+            <label>Dish ID:</label>
+            <input type="text" name="dishId" required/>
+
+            <label>Name:</label>
+            <input type="text" name="name" required/>
+
+            <label>Cuisine:</label>
+            <input type="text" name="cuisine" required/>
+
+            <label>Preparation Time (min):</label>
+            <input type="number" name="preparationTime" required/>
+
+            <button type="submit">Create Dish</button>
+        </form>
+    </th:block>
+
+</div>
+
+<br>
+<a href="/dishes">Back to dishes list</a>
+
+</body>
+</html>
